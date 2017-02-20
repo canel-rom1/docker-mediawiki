@@ -1,0 +1,33 @@
+version: '2'
+
+services:
+        db:
+                image: mariadb:10.1.21
+                volumes:
+                        - /srv/website/db:/var/lib/mysql
+                environment:
+                        MYSQL_ROOT_PASSWORD: "TRwC7VVxGe"
+                        MYSQL_DATABASE: webase
+
+        adminer:
+                depends_on:
+                        - db
+                image: adminer:4.2.5
+                ports:
+                        - "8080:8080"
+
+        http: 
+                depends_on:
+                        - db
+                build: ./mediawiki/1.28
+                image: canel/mediawiki:1.28.0
+                ports:
+                        - "80:80"
+                volumes:
+                        - /srv/website/http:/var/www/html:ro
+                        - /srv/website/images:/var/www/html/images:rw
+                environment:
+                        MEDIAWIKI_DB_HOST: db
+                        MYSQL_PORT_3306_TCP: 3306
+                        MEDIAWIKI_DB_NAME: webase
+                        MEDIAWIKI_DB_PASSWORD: "TRwC7VVxGe"
