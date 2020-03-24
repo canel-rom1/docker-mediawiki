@@ -1,6 +1,6 @@
 prefix ?= canelrom1
 name   ?= mediawiki
-tag    ?= $(shell date +%y.%m.%m)
+tag    ?= $(shell date +%Y%m%d.%H%M%S)
 
 port   ?= 80
 
@@ -29,7 +29,7 @@ clean-docker-latest:
 clean: clean-docker clean-docker-latest
 
 monitor:
-	docker exec -it $(name) bash
+	docker exec -it $(name) sh
 
 
 # vim: ft=make
