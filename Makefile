@@ -31,5 +31,11 @@ clean: clean-docker clean-docker-latest
 monitor:
 	docker exec -it $(name) sh
 
+up:
+	docker-compose up -d
+
+down:
+	docker-compose down
+
 
 # vim: ft=make
