@@ -10,8 +10,8 @@ run:
 	docker run -d --name $(name) \
                    -p $(port):80 $(prefix)/$(name):latest
 
-build: Dockerfile
-	docker build -t $(prefix)/$(name):$(tag) .
+build: src/Dockerfile
+	docker build -t $(prefix)/$(name):$(tag) src
 	docker tag $(prefix)/$(name):$(tag) $(prefix)/$(name):latest 
 
 stop:
