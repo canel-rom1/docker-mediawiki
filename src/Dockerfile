@@ -30,5 +30,7 @@ RUN MEDIAWIKI_DOWNLOAD_URL="https://releases.wikimedia.org/mediawiki/$MEDIAWIKI_
  && rm -fr ${TMP_DIR}/* \
  && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} -R ${HTML_DIR}
 
+VOLUME ["/var/www/html/images"]
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["apache2"]
