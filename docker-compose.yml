@@ -8,14 +8,6 @@ services:
     #restart: always
     ports:
       - "80:80"
-    volumes:
-      - html:/var/www/html
-    environment:
-      MEDIAWIKI_DB_HOST: db
-      MYSQL_PORT_3306_TCP: 3306
-      MEDIAWIKI_DB_NAME: "mediawiki"
-      MEDIAWIKI_DB_USER: "user"
-      MEDIAWIKI_DB_PASSWORD: "dbpass"
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost"]
       interval: 1m
@@ -26,23 +18,17 @@ services:
   db:
     image: mariadb:latest
     #restart: always
-    volumes:
-      - db:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "TRwC7VVxGe"
       MYSQL_DATABASE: "mediawiki"
       MYSQL_USER: "user"
-      MYSQL_PASSWORD: "dbpass"
+      MYSQL_PASSWORD: "password"
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
       interval: 1m
       timeout: 30s
       retries: 3
       start_period: 0s
-
-volumes:
-  db:
-  html:
 
 
 # vim: ft=yaml tw=80 et ts=2 sw=2 sts=2
