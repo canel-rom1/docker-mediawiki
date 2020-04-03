@@ -1,7 +1,7 @@
 FROM canelrom1/apache2-php7:latest
 
 LABEL maintainer="Rom1 <rom1@canel.ch> - CANEL - https://www.canel.ch"
-LABEL date="24/03/2020"
+LABEL date="03/04/2020"
 LABEL description="MediaWiki 1.34"
 
 RUN apk update \
@@ -29,8 +29,6 @@ RUN MEDIAWIKI_DOWNLOAD_URL="https://releases.wikimedia.org/mediawiki/$MEDIAWIKI_
  && mv ${TMP_DIR}/mediawiki-${MEDIAWIKI_FULL_VERSION} ${HTML_DIR} \
  && rm -fr ${TMP_DIR}/* \
  && chown ${APACHE_RUN_USER}:${APACHE_RUN_GROUP} -R ${HTML_DIR}
-
-VOLUME ["/var/www/html/images"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["apache2"]
